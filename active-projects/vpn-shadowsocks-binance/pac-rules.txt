@@ -1,0 +1,35 @@
+// PAC Script for Binance VPN Routing
+// Only Binance traffic goes through proxy
+
+function FindProxyForURL(url, host) {
+    // SOCKS5 proxy configuration
+    var proxy = "SOCKS5 127.0.0.1:1080";
+    
+    // Binance domains that need VPN
+    var binance_domains = [
+        "binance.com",
+        "binance.org", 
+        "binance.us",
+        "binancezh.com",
+        "binance.cloud",
+        "bnbstatic.com",
+        "bntrace.com",
+        "binance.me",
+        "binance.net",
+        "binance.vision",
+        "saasexch.com",
+        "binanceapi.com",
+        "binance-cloud.net"
+    ];
+    
+    // Check if host matches Binance domains
+    for (var i = 0; i < binance_domains.length; i++) {
+        if (dnsDomainIs(host, binance_domains[i]) || 
+            dnsDomainIs(host, "." + binance_domains[i])) {
+            return proxy;  // Use VPN for Binance
+        }
+    }
+    
+    // All other traffic goes direct (no VPN)
+    return "DIRECT";
+}
