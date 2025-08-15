@@ -1,0 +1,7 @@
+{
+  "trend_following": 0.75,
+  "mean_reversion": 0.3,
+  "news_impact": 0.5,
+  "whale_movement": 0.8,
+  "external_ai_signal": 0.3
+}

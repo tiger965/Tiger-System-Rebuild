@@ -1,0 +1,15 @@
+{
+  "signal_id": "ValueScan.io_20250815074539_0",
+  "timestamp": "2025-08-15T07:45:39.037668",
+  "source": "ValueScan.io",
+  "data": {
+    "source": "ValueScan.io",
+    "type": "OPPORTUNITY",
+    "prediction": {
+      "direction": "UP",
+      "target": 50000
+    }
+  },
+  "accuracy": null,
+  "result": null
+}

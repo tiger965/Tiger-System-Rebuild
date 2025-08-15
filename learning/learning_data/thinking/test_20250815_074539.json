@@ -1,0 +1,23 @@
+{
+  "decision_id": "test_20250815_074539",
+  "timestamp": "2025-08-15T07:45:39.033731",
+  "thinking_steps": [
+    {
+      "step": 1,
+      "action": "collect",
+      "data": "收集BTC市场数据"
+    },
+    {
+      "step": 2,
+      "action": "analyze",
+      "pattern": "发现突破形态"
+    },
+    {
+      "step": 3,
+      "action": "decide",
+      "decision": "做多",
+      "confidence": 0.85
+    }
+  ],
+  "confidence": 0.85
+}

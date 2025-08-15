@@ -1,0 +1,16 @@
+{
+  "id": "0e3766bd-ffbf-400f-9c25-251dd3e1b526",
+  "timestamp": "2025-08-15T07:45:39.049653",
+  "symbol": "BTC/USDT",
+  "action": "BUY",
+  "confidence": 0.85,
+  "entry_price": 45000,
+  "reasoning": {
+    "technical": "突破关键阻力"
+  },
+  "status": "success",
+  "pnl": 0.044444444444444446,
+  "exit_price": 47000,
+  "exit_time": "2025-08-15T07:45:39.052748",
+  "result": "success"
+}

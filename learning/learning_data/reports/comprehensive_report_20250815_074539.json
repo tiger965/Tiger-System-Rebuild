@@ -1,0 +1,40 @@
+{
+  "report_info": {
+    "generated_at": "2025-08-15T07:45:39.060680",
+    "system_version": "9.1",
+    "components": [
+      "thinking",
+      "signals",
+      "black_swan",
+      "evolution",
+      "decisions"
+    ]
+  },
+  "executive_summary": {
+    "total_decisions": 1,
+    "success_rate": 1.0,
+    "total_pnl": 0.044444444444444446,
+    "avg_confidence": 0.85,
+    "signals_tracked": 1,
+    "weight_evolutions": 3
+  },
+  "system_health": {
+    "timestamp": "2025-08-15T07:45:39.063799",
+    "overall_status": "healthy",
+    "components": {
+      "thinking_recorder": "healthy",
+      "signal_learning": "healthy",
+      "black_swan": "healthy",
+      "prompt_evolution": "healthy",
+      "decision_tracker": "healthy"
+    },
+    "errors": []
+  },
+  "current_weights": {
+    "trend_following": 0.75,
+    "mean_reversion": 0.3,
+    "news_impact": 0.5,
+    "whale_movement": 0.8,
+    "external_ai_signal": 0.3
+  }
+}
