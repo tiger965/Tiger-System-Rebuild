@@ -1,0 +1,169 @@
+{
+  "report_info": {
+    "generated_at": "2025-08-15T07:29:54.192328",
+    "system_version": "9.1",
+    "components": [
+      "thinking",
+      "signals",
+      "black_swan",
+      "evolution",
+      "decisions"
+    ]
+  },
+  "executive_summary": {
+    "total_decisions": 1,
+    "success_rate": 1.0,
+    "total_pnl": 0.044444444444444446,
+    "avg_confidence": 0.8,
+    "signals_tracked": 1,
+    "weight_evolutions": 1
+  },
+  "detailed_analysis": {
+    "thinking_patterns": {
+      "total_records": 1,
+      "average_confidence": 0.8,
+      "market_conditions": {
+        "normal": 1
+      },
+      "common_patterns": [],
+      "success_indicators": []
+    },
+    "signal_learning": {
+      "timestamp": "2025-08-15T07:29:54.192061",
+      "total_signals_tracked": 1,
+      "sources_analyzed": 2,
+      "best_performing_sources": [],
+      "weight_recommendations": {
+        "ValueScan.io": 0.25,
+        "TradingView": 0.35000000000000003,
+        "CryptoQuant": 0.3,
+        "Glassnode": 0.35,
+        "IntoTheBlock": 0.3
+      },
+      "insights": []
+    },
+    "weight_evolution": {
+      "total_evolutions": 1,
+      "last_evolution": "2025-08-15T07:29:54.148666",
+      "weight_trends": {
+        "trend_following": {
+          "initial": 0.75,
+          "current": 0.75,
+          "change": 0.0
+        },
+        "mean_reversion": {
+          "initial": 0.3,
+          "current": 0.3,
+          "change": 0.0
+        },
+        "news_impact": {
+          "initial": 0.5,
+          "current": 0.5,
+          "change": 0.0
+        },
+        "whale_movement": {
+          "initial": 0.8,
+          "current": 0.8,
+          "change": 0.0
+        },
+        "external_ai_signal": {
+          "initial": 0.3,
+          "current": 0.3,
+          "change": 0.0
+        },
+        "technical_analysis": {
+          "initial": 0.6,
+          "current": 0.6,
+          "change": 0.0
+        },
+        "on_chain_data": {
+          "initial": 0.7,
+          "current": 0.7,
+          "change": 0.0
+        },
+        "sentiment_analysis": {
+          "initial": 0.4,
+          "current": 0.4,
+          "change": 0.0
+        },
+        "volume_analysis": {
+          "initial": 0.5,
+          "current": 0.5,
+          "change": 0.0
+        },
+        "volatility_factor": {
+          "initial": 0.6,
+          "current": 0.6,
+          "change": 0.0
+        },
+        "risk_aversion": {
+          "initial": 0.5,
+          "current": 0.5,
+          "change": 0.0
+        },
+        "time_horizon": {
+          "initial": 0.5,
+          "current": 0.5,
+          "change": 0.0
+        }
+      },
+      "most_improved": {
+        "strategy": "time_horizon",
+        "change": 0.0
+      },
+      "most_declined": {
+        "strategy": "trend_following",
+        "change": 0.0
+      }
+    },
+    "success_patterns": {
+      "total_successes": 1,
+      "average_pnl": 0.044444444444444446,
+      "average_confidence": 0.85,
+      "average_duration": 1.6008333333333334e-06,
+      "best_time": "asia_morning",
+      "best_confidence_range": ">0.8",
+      "best_market_condition": "unknown",
+      "best_signal_combination": [],
+      "common_features": {}
+    },
+    "failure_patterns": {
+      "message": "暂无失败模式数据"
+    },
+    "performance_metrics": {
+      "period_days": 30,
+      "total_decisions": 1,
+      "success_count": 1,
+      "failure_count": 0,
+      "neutral_count": 0,
+      "success_rate": 1.0,
+      "total_pnl": 0.044444444444444446,
+      "average_pnl": 0.044444444444444446,
+      "best_trade": {
+        "id": "357e7f03-73b3-4f57-9117-d4e7ce0e60c8",
+        "symbol": "BTC/USDT",
+        "pnl": 0.044444444444444446,
+        "confidence": 0.85
+      },
+      "worst_trade": {
+        "id": "357e7f03-73b3-4f57-9117-d4e7ce0e60c8",
+        "symbol": "BTC/USDT",
+        "pnl": 0.044444444444444446,
+        "confidence": 0.85
+      },
+      "sharpe_ratio": 0,
+      "max_drawdown": 0.0,
+      "win_loss_ratio": 0,
+      "average_win": 0.044444444444444446,
+      "average_loss": 0
+    }
+  },
+  "recommendations": [
+    {
+      "type": "timing",
+      "priority": "high",
+      "suggestion": "优先在 asia_morning 时段进行交易",
+      "reason": "该时段历史成功率最高"
+    }
+  ]
+}

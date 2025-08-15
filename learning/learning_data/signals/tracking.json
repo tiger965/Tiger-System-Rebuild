@@ -1,0 +1,21 @@
+{
+  "ValueScan.io_20250815072954_0": {
+    "signal_id": "ValueScan.io_20250815072954_0",
+    "source": "ValueScan.io",
+    "signal_type": "OPPORTUNITY",
+    "prediction": {
+      "direction": "UP",
+      "target": 50000,
+      "probability": 0.7
+    },
+    "confidence": 0.7,
+    "timestamp": "2025-08-15T07:29:54.137539",
+    "symbol": "BTC/USDT",
+    "timeframe": "4h",
+    "actual_outcome": null,
+    "accuracy": null,
+    "time_to_verify": null,
+    "status": "pending",
+    "metadata": {}
+  }
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "timestamp": "2025-08-15T07:29:54.148666",
+    "adjustments": {
+      "trend_following": {
+        "old": 0.7,
+        "new": 0.75,
+        "reason": "高成功率 78.0%"
+      }
+    },
+    "performance_basis": {
+      "trend_following": {
+        "success_rate": 0.78,
+        "sample_count": 25
+      },
+      "mean_reversion": {
+        "success_rate": 0.42,
+        "sample_count": 18
+      },
+      "news_impact": {
+        "success_rate": 0.65,
+        "sample_count": 12
+      }
+    },
+    "weights_snapshot": {
+      "trend_following": 0.75,
+      "mean_reversion": 0.3,
+      "news_impact": 0.5,
+      "whale_movement": 0.8,
+      "external_ai_signal": 0.3,
+      "technical_analysis": 0.6,
+      "on_chain_data": 0.7,
+      "sentiment_analysis": 0.4,
+      "volume_analysis": 0.5,
+      "volatility_factor": 0.6,
+      "risk_aversion": 0.5,
+      "time_horizon": 0.5,
+      "market_regime": {
+        "bull": 0.7,
+        "bear": 0.3,
+        "sideways": 0.5
+      }
+    }
+  }
+]

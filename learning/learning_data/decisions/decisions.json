@@ -1,0 +1,36 @@
+{
+  "357e7f03-73b3-4f57-9117-d4e7ce0e60c8": {
+    "id": "357e7f03-73b3-4f57-9117-d4e7ce0e60c8",
+    "timestamp": "2025-08-15T07:29:54.160492",
+    "symbol": "BTC/USDT",
+    "action": "BUY",
+    "confidence": 0.85,
+    "position_size": 0.1,
+    "entry_price": 45000,
+    "stop_loss": 43000,
+    "take_profit": 48000,
+    "reasoning": {
+      "technical": "突破关键阻力",
+      "sentiment": "积极"
+    },
+    "market_conditions": {},
+    "signals_used": [],
+    "result": "success",
+    "pnl": 0.044444444444444446,
+    "exit_price": 47000,
+    "exit_time": "2025-08-15T07:29:54.166255",
+    "duration_hours": 1.6008333333333334e-06,
+    "status": "success",
+    "metadata": {},
+    "features": {
+      "confidence_level": "very_high",
+      "market_condition": "unknown",
+      "volatility": "normal",
+      "volume": "average",
+      "time_of_day": "asia_morning",
+      "signals_count": 0,
+      "has_stop_loss": true,
+      "has_take_profit": true
+    }
+  }
+}

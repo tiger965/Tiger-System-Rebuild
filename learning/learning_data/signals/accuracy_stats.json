@@ -1,0 +1,35 @@
+{
+  "ValueScan.io": {
+    "total_signals": 1,
+    "correct": 0,
+    "incorrect": 0,
+    "pending": 1,
+    "accuracy": 0.0,
+    "weight_suggestion": 0.1,
+    "signal_types": {
+      "HIGH_RISK": {
+        "total": 0,
+        "correct": 0
+      },
+      "OPPORTUNITY": {
+        "total": 1,
+        "correct": 0
+      },
+      "NEUTRAL": {
+        "total": 0,
+        "correct": 0
+      }
+    },
+    "performance_history": []
+  },
+  "TradingView": {
+    "total_signals": 0,
+    "correct": 0,
+    "incorrect": 0,
+    "pending": 0,
+    "accuracy": 0.0,
+    "weight_suggestion": 0.1,
+    "signal_types": {},
+    "performance_history": []
+  }
+}

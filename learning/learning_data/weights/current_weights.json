@@ -1,0 +1,19 @@
+{
+  "trend_following": 0.75,
+  "mean_reversion": 0.3,
+  "news_impact": 0.5,
+  "whale_movement": 0.8,
+  "external_ai_signal": 0.3,
+  "technical_analysis": 0.6,
+  "on_chain_data": 0.7,
+  "sentiment_analysis": 0.4,
+  "volume_analysis": 0.5,
+  "volatility_factor": 0.6,
+  "risk_aversion": 0.5,
+  "time_horizon": 0.5,
+  "market_regime": {
+    "bull": 0.7,
+    "bear": 0.3,
+    "sideways": 0.5
+  }
+}

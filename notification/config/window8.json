@@ -1,0 +1,52 @@
+{
+  "version": "8.1",
+  "created_at": "2025-08-15T07:30:17.792352",
+  "channels": {
+    "telegram": {
+      "enabled": false,
+      "bot_token": "YOUR_BOT_TOKEN",
+      "chat_id": "YOUR_CHAT_ID",
+      "timeout": 30,
+      "retry_count": 3
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "smtp.gmail.com",
+      "port": 587,
+      "username": "your_email@gmail.com",
+      "password": "your_password",
+      "use_tls": true,
+      "default_to": "recipient@gmail.com",
+      "timeout": 30
+    },
+    "terminal": {
+      "enabled": true,
+      "colored_output": true,
+      "width": null
+    }
+  },
+  "reports": {
+    "output_dir": "./reports",
+    "cleanup_days": 7,
+    "pdf_options": {
+      "page-size": "A4",
+      "margin-top": "0.75in",
+      "margin-right": "0.75in",
+      "margin-bottom": "0.75in",
+      "margin-left": "0.75in"
+    }
+  },
+  "api": {
+    "host": "0.0.0.0",
+    "port": 8008,
+    "cors_origins": [
+      "*"
+    ],
+    "log_level": "info"
+  },
+  "performance": {
+    "max_concurrent_requests": 100,
+    "request_timeout": 60,
+    "batch_size_limit": 50
+  }
+}

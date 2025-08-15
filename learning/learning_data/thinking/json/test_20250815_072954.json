@@ -1,0 +1,82 @@
+{
+  "decision_id": "test_20250815_072954",
+  "timestamp": "2025-08-15T07:29:54.124166",
+  "thinking_steps": [
+    {
+      "step": 1,
+      "name": "数据收集",
+      "content": {
+        "step": 1,
+        "action": "collect",
+        "data": "收集BTC市场数据",
+        "sources": [
+          "Binance"
+        ]
+      },
+      "timestamp": "2025-08-15T07:29:54.124174",
+      "data_sources": [
+        "Binance"
+      ],
+      "patterns_found": [],
+      "risks_identified": [],
+      "opportunities": []
+    },
+    {
+      "step": 2,
+      "name": "异常识别",
+      "content": {
+        "step": 2,
+        "action": "analyze",
+        "pattern": "发现突破形态",
+        "confidence": 0.75
+      },
+      "timestamp": "2025-08-15T07:29:54.124184",
+      "data_sources": [],
+      "patterns_found": [],
+      "risks_identified": [],
+      "opportunities": []
+    },
+    {
+      "step": 3,
+      "name": "模式匹配",
+      "content": {
+        "step": 3,
+        "action": "assess",
+        "risk": "中等风险",
+        "reward": "高收益潜力"
+      },
+      "timestamp": "2025-08-15T07:29:54.124199",
+      "data_sources": [],
+      "patterns_found": [],
+      "risks_identified": [],
+      "opportunities": []
+    },
+    {
+      "step": 4,
+      "name": "风险评估",
+      "content": {
+        "step": 4,
+        "action": "decide",
+        "decision": "做多",
+        "confidence": 0.85
+      },
+      "timestamp": "2025-08-15T07:29:54.124205",
+      "data_sources": [],
+      "patterns_found": [],
+      "risks_identified": [],
+      "opportunities": []
+    }
+  ],
+  "final_decision": {
+    "step": 4,
+    "action": "decide",
+    "decision": "做多",
+    "confidence": 0.85
+  },
+  "confidence": 0.8,
+  "metadata": {
+    "ai_model": "Claude Opus 4.1",
+    "version": "1.0",
+    "market_condition": "normal"
+  }
+}

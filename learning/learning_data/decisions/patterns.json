@@ -1,0 +1,27 @@
+{
+  "success_patterns": [
+    {
+      "timestamp": "2025-08-15T07:29:54.177734",
+      "confidence": 0.85,
+      "pnl": 0.044444444444444446,
+      "duration_hours": 1.6008333333333334e-06,
+      "features": {
+        "confidence_level": "very_high",
+        "market_condition": "unknown",
+        "volatility": "normal",
+        "volume": "average",
+        "time_of_day": "asia_morning",
+        "signals_count": 0,
+        "has_stop_loss": true,
+        "has_take_profit": true
+      },
+      "market_conditions": {},
+      "signals_used": [],
+      "key_factors": [
+        "高信心度决策"
+      ]
+    }
+  ],
+  "failure_patterns": [],
+  "neutral_patterns": []
+}
