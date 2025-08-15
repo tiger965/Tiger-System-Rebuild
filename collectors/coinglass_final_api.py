@@ -21,7 +21,7 @@ class CoinglassFinalAPI:
     """
     
     def __init__(self):
-        self.api_key = "689079f638414a18bac90b722446f3b3"
+        self.api_key = "9ac3153a98924877a863d41986231e36"  # 新的API key
         self.base_url = "https://open-api-v4.coinglass.com"
         
         # 正确的header

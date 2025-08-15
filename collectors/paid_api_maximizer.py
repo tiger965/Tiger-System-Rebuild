@@ -26,7 +26,7 @@ class PaidAPIMaximizer:
     
     def __init__(self):
         # API密钥
-        self.coinglass_key = "689079f638414a18bac90b722446f3b3"  # 新的API key
+        self.coinglass_key = "9ac3153a98924877a863d41986231e36"  # 最新的API key
         self.whale_alert_key = "pGV9OtVnzgp0bTbUgU4aaWhVMVYfqPLU"
         
         # Coinglass API基础配置
