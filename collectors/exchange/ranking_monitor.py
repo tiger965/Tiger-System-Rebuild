@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import ccxt
 import pandas as pd
 from loguru import logger
+from .vpn_checker import ensure_binance_vpn
 
 
 class RankingMonitor:
@@ -37,7 +38,17 @@ class RankingMonitor:
                 }
             })
             
-            # Binance配置（通过代理）
+            # 🔒 币安需要强制VPN检查 - 防止封号
+            logger.info("🔒 检查币安VPN连接...")
+            try:
+                ensure_binance_vpn()
+                logger.info("✅ 币安VPN检查通过")
+            except Exception as vpn_error:
+                logger.error(f"🚨 币安VPN检查失败: {vpn_error}")
+                logger.error("🚨 为防止封号，币安客户端将不可用")
+                raise Exception(f"币安VPN必须连接！{vpn_error}")
+            
+            # Binance配置（通过VPN代理）
             self.binance_client = ccxt.binance({
                 'apiKey': 'cKnsfwbBg9nYj1lsPfoK26UtAYf8Oiq7TALPIBQC6UYfJ2p4sMJu5nRRfooVSN4t',
                 'secret': 'iKWUuPcvWrCs3QGMd3it9LuN408TQaRdh7amTpY4mbLQo5K8kvDOVyaQoN7P1NYj',
@@ -51,7 +62,7 @@ class RankingMonitor:
                 }
             })
             
-            logger.info("交易所客户端初始化成功")
+            logger.info("✅ 交易所客户端初始化成功（含VPN保护）")
             
         except Exception as e:
             logger.error(f"初始化交易所失败: {e}")
