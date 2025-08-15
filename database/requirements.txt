@@ -1,0 +1,37 @@
+# Window 1 数据库工具依赖
+
+# 数据库连接
+psycopg2-binary>=2.9.0
+redis>=4.0.0
+
+# 数学计算
+numpy>=1.21.0
+
+# 异步支持
+asyncio
+
+# 测试依赖
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# 日志
+logging
+
+# 类型提示
+typing-extensions
+
+# JSON处理
+json5
+
+# 时间处理
+python-dateutil
+
+# UUID生成
+uuid
+
+# 配置管理
+pyyaml
+
+# 性能分析（可选）
+memory-profiler
+psutil
