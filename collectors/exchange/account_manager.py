@@ -41,8 +41,8 @@ class AccountManager:
                 'secret': 'iKWUuPcvWrCs3QGMd3it9LuN408TQaRdh7amTpY4mbLQo5K8kvDOVyaQoN7P1NYj',
                 'enableRateLimit': True,
                 'proxies': {
-                    'http': 'http://127.0.0.1:1099',
-                    'https': 'http://127.0.0.1:1099'
+                    'http': 'http://127.0.0.1:1080',
+                    'https': 'http://127.0.0.1:1080'
                 },
                 'options': {
                     'defaultType': 'spot'
