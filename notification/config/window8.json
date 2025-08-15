@@ -3,20 +3,20 @@
   "created_at": "2025-08-15T07:30:17.792352",
   "channels": {
     "telegram": {
-      "enabled": false,
-      "bot_token": "YOUR_BOT_TOKEN",
-      "chat_id": "YOUR_CHAT_ID",
+      "enabled": true,
+      "bot_token": "8391442477:AAF14k8gvFd31QT3Wwsgy4pqdIOAyBMibt0",
+      "chat_id": "806361109",
       "timeout": 30,
       "retry_count": 3
     },
     "email": {
-      "enabled": false,
+      "enabled": true,
       "smtp_server": "smtp.gmail.com",
       "port": 587,
-      "username": "your_email@gmail.com",
-      "password": "your_password",
+      "username": "a368070666@gmail.com",
+      "password": "jgkf gjvs dbfz zrhp",
       "use_tls": true,
-      "default_to": "recipient@gmail.com",
+      "default_to": "a368070666@gmail.com",
       "timeout": 30
     },
     "terminal": {
