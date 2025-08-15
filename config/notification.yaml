@@ -1,0 +1,10 @@
+alert_throttle: 60
+batch_notifications: true
+channels:
+- telegram
+- email
+- webhook
+email_recipients: []
+enabled: true
+telegram_chat_id: ''
+webhook_url: ''

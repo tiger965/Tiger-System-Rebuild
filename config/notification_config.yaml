@@ -1,0 +1,569 @@
+# Tiger系统 - 通知推送配置
+# 更新时间: 2025-08-11
+# 维护: 10号窗口
+
+# ==================== 通知优先级定义 ====================
+priority_levels:
+  critical:  # 紧急
+    level: 0
+    description: "系统崩溃、重大损失风险、紧急交易信号"
+    channels: ["email", "telegram", "dingtalk", "phone_call"]
+    retry_times: 3
+    retry_interval: 60  # 秒
+    
+  high:  # 高优先级
+    level: 1
+    description: "重要交易信号、大额异动、风险预警"
+    channels: ["email", "telegram", "dingtalk"]
+    retry_times: 2
+    retry_interval: 120
+    
+  medium:  # 中优先级
+    level: 2
+    description: "普通交易信号、市场分析、日常报告"
+    channels: ["email", "telegram"]
+    retry_times: 1
+    retry_interval: 300
+    
+  low:  # 低优先级
+    level: 3
+    description: "信息提醒、统计报告、系统日志"
+    channels: ["email"]
+    retry_times: 0
+    retry_interval: 0
+
+# ==================== 邮件通知配置 ====================
+email:
+  enabled: true
+  
+  # SMTP服务器配置
+  smtp:
+    # Gmail配置示例
+    gmail:
+      host: "smtp.gmail.com"
+      port: 587
+      use_tls: true
+      username: "a368070666@gmail.com"  # 你的Gmail地址
+      password: ""  # 需要设置应用专用密码（见下方说明）
+      
+    # QQ邮箱配置
+    qq:
+      host: "smtp.qq.com"
+      port: 587
+      use_tls: true
+      username: ""  # QQ邮箱地址
+      password: ""  # 授权码
+      
+    # 163邮箱配置
+    163:
+      host: "smtp.163.com"
+      port: 465
+      use_ssl: true
+      username: ""  # 163邮箱地址
+      password: ""  # 授权码
+      
+    # Outlook配置
+    outlook:
+      host: "smtp-mail.outlook.com"
+      port: 587
+      use_tls: true
+      username: ""  # Outlook邮箱
+      password: ""  # 密码
+      
+  # 默认使用的SMTP服务器
+  default_provider: "qq"
+  
+  # 发件人信息
+  sender:
+    name: "Tiger系统通知"
+    address: "a368070666@gmail.com"  # 发件人邮箱
+    
+  # 收件人列表
+  recipients:
+    default:
+      - "a368070666@gmail.com"  # 主要收件人（自己给自己发）
+    critical:  # 紧急通知额外收件人
+      - "a368070666@gmail.com"
+    report:  # 报告收件人
+      - "a368070666@gmail.com"
+      
+  # 邮件模板
+  templates:
+    signal:
+      subject: "[Tiger] {priority} - {signal_type}交易信号"
+      body: |
+        时间: {time}
+        信号类型: {signal_type}
+        币种: {symbol}
+        价格: ${price}
+        建议操作: {action}
+        原因: {reason}
+        
+        ---
+        Tiger智能交易系统
+        
+    alert:
+      subject: "[Tiger警报] {alert_type}"
+      body: |
+        警报时间: {time}
+        警报类型: {alert_type}
+        警报级别: {level}
+        详细信息: {detail}
+        建议操作: {suggestion}
+        
+    report:
+      subject: "[Tiger报告] {report_type} - {date}"
+      body: |
+        报告类型: {report_type}
+        报告时间: {time}
+        报告内容: 
+        {content}
+
+# ==================== Telegram通知配置 ====================
+telegram:
+  enabled: true
+  
+  # Bot配置
+  bot:
+    token: ""  # 从 @BotFather 获取
+    username: ""  # Bot用户名
+    
+  # 频道/群组配置
+  channels:
+    default:
+      chat_id: ""  # 默认频道ID
+      name: "Tiger主频道"
+      
+    signals:
+      chat_id: ""  # 信号频道ID
+      name: "交易信号"
+      
+    alerts:
+      chat_id: ""  # 警报频道ID
+      name: "风险警报"
+      
+    reports:
+      chat_id: ""  # 报告频道ID
+      name: "日常报告"
+      
+  # 消息格式
+  format:
+    parse_mode: "Markdown"  # Markdown/HTML
+    disable_notification: false  # 是否静音
+    
+  # 消息模板
+  templates:
+    signal: |
+      🚀 *交易信号*
+      ⏰ 时间: `{time}`
+      💰 币种: *{symbol}*
+      💵 价格: `${price}`
+      📊 操作: *{action}*
+      📝 原因: {reason}
+      
+    alert: |
+      ⚠️ *系统警报*
+      ⏰ 时间: `{time}`
+      🔴 类型: *{alert_type}*
+      📊 级别: {level}
+      📝 详情: {detail}
+      
+    report: |
+      📊 *{report_type}*
+      📅 日期: {date}
+      ⏰ 时间: {time}
+      
+      {content}
+
+# ==================== 钉钉通知配置 ====================
+dingtalk:
+  enabled: true
+  
+  # 机器人配置
+  robots:
+    default:
+      webhook: ""  # Webhook地址
+      secret: ""   # 签名密钥（可选）
+      keywords: ["Tiger", "交易", "警报"]  # 关键词
+      
+    critical:  # 紧急通知专用
+      webhook: ""
+      secret: ""
+      at_all: true  # @所有人
+      
+  # 消息类型配置
+  msg_types:
+    text:  # 文本消息
+      enabled: true
+      
+    markdown:  # Markdown消息
+      enabled: true
+      
+    action_card:  # 卡片消息
+      enabled: false
+      
+  # 消息模板
+  templates:
+    signal:
+      title: "Tiger交易信号"
+      text: |
+        ## 交易信号
+        - 时间: {time}
+        - 币种: **{symbol}**
+        - 价格: ${price}
+        - 操作: **{action}**
+        - 原因: {reason}
+        
+    alert:
+      title: "Tiger系统警报"
+      text: |
+        ## ⚠️ 系统警报
+        - 时间: {time}
+        - 类型: **{alert_type}**
+        - 级别: {level}
+        - 详情: {detail}
+        
+    report:
+      title: "Tiger系统报告"
+      text: |
+        ## 📊 {report_type}
+        - 日期: {date}
+        - 时间: {time}
+        
+        {content}
+
+# ==================== Webhook通知配置 ====================
+webhook:
+  enabled: true
+  
+  # Webhook端点列表
+  endpoints:
+    default:
+      url: ""  # Webhook URL
+      method: "POST"
+      headers:
+        Content-Type: "application/json"
+        Authorization: "Bearer {token}"
+      timeout: 30
+      
+    critical:
+      url: ""
+      method: "POST"
+      priority: true
+      
+  # 数据格式
+  payload_format:
+    type: "json"  # json/form
+    
+  # 负载模板
+  templates:
+    standard: |
+      {
+        "timestamp": "{timestamp}",
+        "type": "{msg_type}",
+        "priority": "{priority}",
+        "data": {
+          "title": "{title}",
+          "content": "{content}",
+          "metadata": {metadata}
+        }
+      }
+
+# ==================== 企业微信通知 ====================
+wechat_work:
+  enabled: false
+  
+  # 应用配置
+  app:
+    corp_id: ""     # 企业ID
+    agent_id: ""    # 应用ID
+    secret: ""      # 应用密钥
+    
+  # 接收人配置
+  receivers:
+    users: []       # 用户列表
+    parties: []     # 部门列表
+    tags: []        # 标签列表
+    
+  # 消息模板
+  templates:
+    text:
+      content: "{content}"
+      
+    markdown:
+      content: "{content}"
+      
+    card:
+      title: "{title}"
+      description: "{description}"
+      url: "{url}"
+
+# ==================== Slack通知 ====================
+slack:
+  enabled: false
+  
+  # Bot配置
+  bot:
+    token: ""  # Bot User OAuth Token
+    
+  # 频道配置
+  channels:
+    default: "#general"
+    signals: "#trading-signals"
+    alerts: "#alerts"
+    
+  # 消息格式
+  format:
+    username: "Tiger Bot"
+    icon_emoji: ":tiger:"
+    
+  # 消息模板
+  templates:
+    signal:
+      text: "New trading signal"
+      blocks: []  # Slack blocks格式
+
+# ==================== Discord通知 ====================
+discord:
+  enabled: false
+  
+  # Webhook配置
+  webhooks:
+    default:
+      url: ""  # Discord Webhook URL
+      username: "Tiger Bot"
+      avatar_url: ""
+      
+  # 嵌入消息模板
+  embeds:
+    signal:
+      title: "Trading Signal"
+      color: 0x00ff00  # 绿色
+      fields: []
+      
+    alert:
+      title: "System Alert"
+      color: 0xff0000  # 红色
+      fields: []
+
+# ==================== 短信通知 ====================
+sms:
+  enabled: false
+  
+  # 服务提供商
+  providers:
+    # 阿里云短信
+    aliyun:
+      access_key: ""
+      secret: ""
+      sign_name: ""
+      template_code: ""
+      
+    # 腾讯云短信
+    tencent:
+      app_id: ""
+      app_key: ""
+      sign: ""
+      template_id: ""
+      
+    # Twilio
+    twilio:
+      account_sid: ""
+      auth_token: ""
+      from_number: ""
+      
+  # 默认提供商
+  default_provider: "aliyun"
+  
+  # 接收号码
+  recipients:
+    default: []
+    critical: []  # 紧急通知号码
+
+# ==================== 语音电话通知 ====================
+phone_call:
+  enabled: false
+  
+  # 仅用于最紧急情况
+  providers:
+    # 阿里云语音
+    aliyun:
+      access_key: ""
+      secret: ""
+      called_show: ""  # 主叫号码
+      tts_code: ""      # 语音模板
+      
+    # Twilio语音
+    twilio:
+      account_sid: ""
+      auth_token: ""
+      from_number: ""
+      
+  # 默认提供商
+  default_provider: "twilio"
+  
+  # 接收号码（仅紧急）
+  recipients:
+    critical: []
+
+# ==================== 推送服务 ====================
+push:
+  enabled: false
+  
+  # iOS推送
+  ios:
+    # APNs配置
+    apns:
+      cert_file: ""
+      key_file: ""
+      use_sandbox: false
+      
+  # Android推送
+  android:
+    # FCM配置
+    fcm:
+      server_key: ""
+      
+  # 统一推送
+  unified:
+    # 极光推送
+    jpush:
+      app_key: ""
+      master_secret: ""
+
+# ==================== 通知规则配置 ====================
+rules:
+  # 时间规则
+  time_rules:
+    # 免打扰时段
+    do_not_disturb:
+      enabled: false
+      start: "23:00"
+      end: "07:00"
+      exceptions: ["critical"]  # 例外级别
+      
+    # 工作时间
+    working_hours:
+      enabled: false
+      days: ["Mon", "Tue", "Wed", "Thu", "Fri"]
+      start: "09:00"
+      end: "18:00"
+      
+  # 频率限制
+  rate_limit:
+    # 每小时最大通知数
+    per_hour:
+      default: 30
+      critical: 100  # 紧急无限制
+      
+    # 每天最大通知数
+    per_day:
+      default: 200
+      critical: 1000
+      
+  # 聚合规则
+  aggregation:
+    enabled: true
+    window: 300  # 5分钟内相似消息聚合
+    max_count: 10  # 最多聚合数量
+    
+  # 过滤规则
+  filters:
+    # 币种过滤
+    symbols:
+      whitelist: []  # 白名单
+      blacklist: []  # 黑名单
+      
+    # 价格变动过滤
+    price_change:
+      min_percent: 1.0  # 最小变动百分比
+      
+    # 金额过滤
+    amount:
+      min_usd: 10000  # 最小金额
+
+# ==================== 通知内容配置 ====================
+content:
+  # 语言设置
+  language: "zh_CN"  # zh_CN/en_US
+  
+  # 时区设置
+  timezone: "Asia/Shanghai"
+  
+  # 格式设置
+  format:
+    time: "%Y-%m-%d %H:%M:%S"
+    number: "{:,.2f}"
+    percent: "{:.2%}"
+    
+  # 附加信息
+  footer:
+    enabled: true
+    text: "Tiger智能交易系统"
+    
+  # 链接配置
+  links:
+    dashboard: ""  # 控制面板链接
+    docs: ""       # 文档链接
+
+# ==================== 故障转移配置 ====================
+failover:
+  enabled: true
+  
+  # 主备切换
+  primary_channel: "telegram"
+  backup_channels:
+    - "email"
+    - "dingtalk"
+    
+  # 重试策略
+  retry:
+    max_attempts: 3
+    backoff: "exponential"  # linear/exponential
+    initial_delay: 60  # 秒
+    max_delay: 3600    # 秒
+    
+  # 降级策略
+  degradation:
+    enabled: true
+    rules:
+      - condition: "channel_failure"
+        action: "use_backup"
+      - condition: "rate_exceeded"
+        action: "queue_message"
+
+# ==================== 日志与监控 ====================
+logging:
+  # 通知日志
+  notification_log:
+    enabled: true
+    path: "logs/notifications.log"
+    level: "INFO"
+    
+  # 失败日志
+  failure_log:
+    enabled: true
+    path: "logs/notification_failures.log"
+    
+  # 统计信息
+  statistics:
+    enabled: true
+    interval: 3600  # 每小时统计
+    
+# ==================== 测试配置 ====================
+testing:
+  enabled: true
+  
+  # 测试模式（不实际发送）
+  dry_run: false
+  
+  # 测试接收者
+  test_recipients:
+    email: "test@example.com"
+    telegram: "@test_channel"
+    
+  # 测试消息
+  test_message:
+    type: "test"
+    priority: "low"
+    content: "这是一条测试消息"

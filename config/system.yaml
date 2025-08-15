@@ -1,0 +1,77 @@
+# System configuration for Tiger System
+
+# System identification
+system_name: Tiger Intelligent Trading Analysis System
+version: 1.0.0
+environment: development  # development, staging, production
+
+# Window configuration
+windows:
+  1:
+    name: Database Infrastructure
+    enabled: true
+    priority: 1
+  2:
+    name: Exchange Data Collection
+    enabled: true
+    priority: 2
+  3:
+    name: Chain & Social Data
+    enabled: true
+    priority: 2
+  4:
+    name: Technical Indicators
+    enabled: true
+    priority: 3
+  5:
+    name: Coin Crawler
+    enabled: true
+    priority: 2
+  6:
+    name: AI Decision System
+    enabled: true
+    priority: 4
+  7:
+    name: Risk Control
+    enabled: true
+    priority: 5
+  8:
+    name: Notification System
+    enabled: true
+    priority: 5
+  9:
+    name: Learning System
+    enabled: true
+    priority: 3
+  10:
+    name: Integration Testing
+    enabled: true
+    priority: 6
+
+# Performance settings
+performance:
+  max_workers: 10
+  batch_size: 1000
+  query_timeout: 30  # seconds
+  cache_ttl: 3600  # seconds
+  
+# Monitoring settings
+monitoring:
+  enabled: true
+  log_level: info  # debug, info, warning, error, critical
+  metrics_interval: 60  # seconds
+  health_check_interval: 30  # seconds
+  
+# Data retention
+retention:
+  market_data_days: 90
+  chain_data_days: 180
+  social_data_days: 30
+  system_logs_days: 30
+  
+# Alert thresholds
+alerts:
+  error_rate_threshold: 0.05  # 5%
+  latency_threshold_ms: 1000
+  memory_usage_threshold: 0.8  # 80%
+  cpu_usage_threshold: 0.9  # 90%

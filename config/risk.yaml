@@ -1,0 +1,10 @@
+alert_levels:
+- info
+- warning
+- critical
+- emergency
+emergency_stop: true
+max_daily_loss: 0.05
+max_drawdown: 0.2
+max_open_positions: 5
+risk_score_threshold: 70

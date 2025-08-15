@@ -1,0 +1,25 @@
+# Redis configuration for Tiger System
+
+host: localhost
+port: 6379
+password: tiger_redis_2024
+db: 0
+
+# Connection settings
+decode_responses: true
+max_connections: 50
+socket_keepalive: true
+socket_connect_timeout: 5
+
+# Cache settings
+default_ttl: 3600  # seconds
+market_data_ttl: 300  # 5 minutes
+signal_ttl: 86400  # 24 hours
+
+# Queue settings
+max_queue_length: 10000
+batch_size: 100
+
+# Stream settings
+max_stream_length: 10000
+stream_batch_size: 100

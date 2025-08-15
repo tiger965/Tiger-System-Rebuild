@@ -1,0 +1,14 @@
+{
+  "unit_tests": [],
+  "integration_tests": [],
+  "performance_tests": [],
+  "e2e_tests": [],
+  "summary": {
+    "total": 14,
+    "passed": 13,
+    "failed": 1,
+    "skipped": 0,
+    "duration": 0
+  },
+  "timestamp": "2025-08-11T05:41:51.299651"
+}

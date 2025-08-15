@@ -1,0 +1,483 @@
+# Tiger系统 - 完整API配置文件
+# 更新时间: 2025-08-11
+# 维护: 10号窗口
+
+# ==================== 交易所API ====================
+exchanges:
+  # OKX交易所（已配置）
+  okx:
+    enabled: true
+    api_key: "79d7b5b4-2e9b-4a31-be9c-95527d618739"
+    secret: "070B16A29AF22C13A67D9CB807B5693D"
+    passphrase: "Yzh198796&"
+    base_url: "https://www.okx.com"
+    websocket: "wss://ws.okx.com:8443/ws/v5/public"
+    
+  # 币安交易所（需要代理）
+  binance:
+    enabled: true
+    api_key: ""  # 需要填写
+    secret: ""   # 需要填写
+    base_url: "https://api.binance.com"
+    websocket: "wss://stream.binance.com:9443"
+    proxy: "socks5://127.0.0.1:1099"
+    
+  # Gate.io
+  gate:
+    enabled: false
+    api_key: ""
+    secret: ""
+    base_url: "https://api.gateio.ws"
+    
+  # KuCoin
+  kucoin:
+    enabled: false
+    api_key: ""
+    secret: ""
+    passphrase: ""
+    base_url: "https://api.kucoin.com"
+    
+  # Huobi
+  huobi:
+    enabled: false
+    api_key: ""
+    secret: ""
+    base_url: "https://api.huobi.pro"
+    
+  # Bybit
+  bybit:
+    enabled: false
+    api_key: ""
+    secret: ""
+    base_url: "https://api.bybit.com"
+
+# ==================== 链上数据API ====================
+blockchain:
+  # Bitcoin
+  bitcoin:
+    blockchain_info:
+      enabled: true
+      base_url: "https://blockchain.info"
+      endpoints:
+        - "/q/hashrate"      # 算力
+        - "/q/difficulty"    # 难度
+        - "/q/bcperblock"    # 区块奖励
+        - "/q/totalbc"       # 总供应量
+        
+    mempool_space:
+      enabled: true
+      base_url: "https://mempool.space/api"
+      endpoints:
+        - "/v1/fees/recommended"  # 推荐费用
+        - "/v1/fees/mempool-blocks"  # 内存池
+        
+  # Ethereum
+  ethereum:
+    etherscan:
+      enabled: false
+      api_key: ""  # 需要申请
+      base_url: "https://api.etherscan.io/api"
+      
+    ethgasstation:
+      enabled: true
+      base_url: "https://api.ethgasstation.info"
+      
+    etherchain:
+      enabled: true
+      base_url: "https://www.etherchain.org/api"
+      
+  # BSC
+  bsc:
+    bscscan:
+      enabled: false
+      api_key: ""  # 需要申请
+      base_url: "https://api.bscscan.com/api"
+
+# ==================== DeFi协议API ====================
+defi:
+  # DeFi Llama
+  defillama:
+    enabled: true
+    base_url: "https://api.llama.fi"
+    endpoints:
+      - "/protocols"       # 所有协议
+      - "/tvl/chains"     # 链TVL
+      - "/yields/pools"   # 收益池
+      
+  # Uniswap
+  uniswap:
+    enabled: true
+    graph_url: "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3"
+    
+  # Compound
+  compound:
+    enabled: true
+    base_url: "https://api.compound.finance"
+    
+  # Aave
+  aave:
+    enabled: true
+    graph_url: "https://api.thegraph.com/subgraphs/name/aave/protocol-v3"
+    
+  # MakerDAO
+  maker:
+    enabled: true
+    base_url: "https://api.makerdao.com"
+
+# ==================== 数据聚合平台 ====================
+aggregators:
+  # CoinGecko
+  coingecko:
+    enabled: true
+    api_key: ""  # 免费版不需要
+    base_url: "https://api.coingecko.com/api/v3"
+    endpoints:
+      - "/search/trending"      # 热门币种
+      - "/global"              # 全球数据
+      - "/exchanges"           # 交易所列表
+      - "/coins/markets"       # 市场数据
+      
+  # CoinMarketCap
+  coinmarketcap:
+    enabled: false
+    api_key: ""  # 需要申请
+    base_url: "https://pro-api.coinmarketcap.com"
+    
+  # CryptoCompare
+  cryptocompare:
+    enabled: true
+    api_key: ""  # 免费版限制
+    base_url: "https://min-api.cryptocompare.com"
+    
+  # Messari
+  messari:
+    enabled: true
+    api_key: ""  # 可选
+    base_url: "https://data.messari.io/api"
+    
+  # Glassnode
+  glassnode:
+    enabled: false
+    api_key: ""  # 付费
+    base_url: "https://api.glassnode.com"
+
+# ==================== 社交媒体与情绪 ====================
+social:
+  # Twitter
+  twitter:
+    enabled: false
+    api_key: ""
+    api_secret: ""
+    bearer_token: ""
+    
+  # Reddit
+  reddit:
+    enabled: true
+    client_id: ""
+    client_secret: ""
+    user_agent: "TigerSystem/1.0"
+    
+  # Telegram
+  telegram_monitor:
+    enabled: false
+    api_id: ""
+    api_hash: ""
+    channels:
+      - "@crypto_signals"
+      - "@whale_alert"
+      
+  # Discord
+  discord:
+    enabled: false
+    token: ""
+    
+  # Alternative.me
+  fear_greed:
+    enabled: true
+    base_url: "https://api.alternative.me"
+    endpoints:
+      - "/fng/"  # 恐慌贪婪指数
+
+# ==================== 新闻资讯API ====================
+news:
+  # CryptoCompare News
+  cryptocompare_news:
+    enabled: true
+    base_url: "https://min-api.cryptocompare.com/data/v2/news"
+    
+  # CoinDesk
+  coindesk:
+    enabled: true
+    rss_feed: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+    
+  # CoinTelegraph
+  cointelegraph:
+    enabled: true
+    rss_feed: "https://cointelegraph.com/rss"
+    
+  # The Block
+  theblock:
+    enabled: true
+    rss_feed: "https://www.theblock.co/rss.xml"
+    
+  # Decrypt
+  decrypt:
+    enabled: true
+    rss_feed: "https://decrypt.co/feed"
+
+# ==================== 预言机API ====================
+oracles:
+  # Chainlink
+  chainlink:
+    enabled: true
+    base_url: "https://api.chain.link"
+    
+  # Band Protocol
+  band:
+    enabled: false
+    base_url: "https://api.bandprotocol.com"
+    
+  # API3
+  api3:
+    enabled: false
+    base_url: "https://api.api3.org"
+
+# ==================== 鲸鱼追踪 ====================
+whale_tracking:
+  # Whale Alert
+  whale_alert:
+    enabled: false
+    api_key: ""  # 需要申请
+    base_url: "https://api.whale-alert.io"
+    
+  # Santiment
+  santiment:
+    enabled: false
+    api_key: ""  # 付费
+    base_url: "https://api.santiment.net"
+    
+  # Nansen
+  nansen:
+    enabled: false
+    api_key: ""  # 付费
+    base_url: "https://api.nansen.ai"
+
+# ==================== NFT数据 ====================
+nft:
+  # OpenSea
+  opensea:
+    enabled: false
+    api_key: ""
+    base_url: "https://api.opensea.io"
+    
+  # Blur
+  blur:
+    enabled: false
+    base_url: "https://api.blur.io"
+    
+  # Rarible
+  rarible:
+    enabled: true
+    base_url: "https://api.rarible.org"
+
+# ==================== 稳定币数据 ====================
+stablecoins:
+  # USDT (Tether)
+  tether:
+    enabled: true
+    transparency_url: "https://api.tether.to/v1/transparency"
+    
+  # USDC (Circle)
+  circle:
+    enabled: true
+    api_url: "https://api.circle.com/v1/stablecoins"
+    
+  # DAI (MakerDAO)
+  dai:
+    enabled: true
+    stats_url: "https://api.makerdao.com/dai"
+
+# ==================== 挖矿数据 ====================
+mining:
+  # F2Pool
+  f2pool:
+    enabled: true
+    base_url: "https://api.f2pool.com"
+    
+  # Poolin
+  poolin:
+    enabled: true
+    base_url: "https://api.poolin.com"
+    
+  # BTC.com
+  btc_com:
+    enabled: true
+    base_url: "https://btc.com/api"
+
+# ==================== 衍生品数据 ====================
+derivatives:
+  # Deribit
+  deribit:
+    enabled: false
+    api_key: ""
+    secret: ""
+    base_url: "https://www.deribit.com/api/v2"
+    
+  # BitMEX
+  bitmex:
+    enabled: false
+    api_key: ""
+    secret: ""
+    base_url: "https://www.bitmex.com/api/v1"
+    
+  # CME
+  cme:
+    enabled: false
+    base_url: "https://www.cmegroup.com/api"
+
+# ==================== Layer2数据 ====================
+layer2:
+  # Arbitrum
+  arbitrum:
+    enabled: true
+    rpc_url: "https://arb1.arbitrum.io/rpc"
+    explorer: "https://api.arbiscan.io"
+    
+  # Optimism
+  optimism:
+    enabled: true
+    rpc_url: "https://mainnet.optimism.io"
+    explorer: "https://api-optimistic.etherscan.io"
+    
+  # Polygon
+  polygon:
+    enabled: true
+    rpc_url: "https://polygon-rpc.com"
+    explorer: "https://api.polygonscan.com"
+    
+  # zkSync
+  zksync:
+    enabled: true
+    rpc_url: "https://mainnet.era.zksync.io"
+    explorer: "https://api.zksync.io"
+
+# ==================== 监管与合规 ====================
+regulatory:
+  # Chainalysis
+  chainalysis:
+    enabled: false
+    api_key: ""  # 企业级
+    base_url: "https://api.chainalysis.com"
+    
+  # Elliptic
+  elliptic:
+    enabled: false
+    api_key: ""  # 企业级
+    base_url: "https://api.elliptic.co"
+    
+  # CipherTrace
+  ciphertrace:
+    enabled: false
+    api_key: ""  # 企业级
+    base_url: "https://api.ciphertrace.com"
+
+# ==================== 指标计算服务 ====================
+indicators:
+  # TradingView
+  tradingview:
+    enabled: true
+    webhook_url: ""  # 用于接收信号
+    
+  # TaaS (Trading as a Service)
+  taas:
+    enabled: false
+    api_key: ""
+    base_url: "https://api.taas.fund"
+
+# ==================== API限制配置 ====================
+rate_limits:
+  # 默认限制
+  default:
+    requests_per_minute: 60
+    requests_per_hour: 1000
+    requests_per_day: 10000
+    
+  # 特定API限制
+  binance:
+    weight_per_minute: 1200
+    orders_per_second: 10
+    orders_per_day: 200000
+    
+  coingecko:
+    requests_per_minute: 50  # 免费版
+    
+  etherscan:
+    requests_per_second: 5
+    
+# ==================== 代理配置 ====================
+proxies:
+  # WSL独立代理
+  wsl_proxy:
+    enabled: true
+    type: "socks5"
+    host: "127.0.0.1"
+    port: 1099
+    
+  # 备用代理
+  backup_proxy:
+    enabled: false
+    type: "http"
+    host: ""
+    port: 0
+    username: ""
+    password: ""
+
+# ==================== 数据存储配置 ====================
+storage:
+  # 历史数据
+  historical_data:
+    path: "data/historical"
+    format: "csv"
+    compression: false
+    
+  # 实时数据
+  realtime_data:
+    type: "redis"  # redis/mongodb/postgresql
+    host: "localhost"
+    port: 6379
+    db: 0
+    
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl: 300  # 秒
+    max_size: 1000  # MB
+
+# ==================== 日志配置 ====================
+logging:
+  level: "INFO"  # DEBUG/INFO/WARNING/ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/tiger_system.log"
+  rotation: "daily"
+  retention: 30  # 天
+  
+# ==================== 监控配置 ====================
+monitoring:
+  # Prometheus
+  prometheus:
+    enabled: false
+    port: 9090
+    
+  # Grafana
+  grafana:
+    enabled: false
+    port: 3000
+    
+  # 健康检查
+  health_check:
+    enabled: true
+    interval: 60  # 秒
+    endpoints:
+      - "/health"
+      - "/ready"
+      - "/live"

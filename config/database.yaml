@@ -1,0 +1,30 @@
+# Tiger系统数据库配置
+# 默认使用SQLite，无需安装额外软件
+
+type: sqlite
+database: data/tiger_system.db
+echo: false
+pool_size: 5
+max_overflow: 10
+
+# 如果要使用MySQL，修改为：
+# type: mysql
+# host: localhost
+# port: 3306
+# database: tiger_system
+# username: root
+# password: your_password
+# echo: false
+# pool_size: 10
+# max_overflow: 20
+
+# 如果要使用PostgreSQL，修改为：
+# type: postgresql
+# host: localhost
+# port: 5432
+# database: tiger_system
+# username: postgres
+# password: your_password
+# echo: false
+# pool_size: 10
+# max_overflow: 20

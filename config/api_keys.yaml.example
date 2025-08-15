@@ -1,0 +1,64 @@
+# API Keys configuration template
+# Copy this file to api_keys.yaml and fill in your actual keys
+# NEVER commit api_keys.yaml to version control
+
+# Exchange APIs
+exchanges:
+  binance:
+    api_key: YOUR_BINANCE_API_KEY
+    api_secret: YOUR_BINANCE_SECRET
+  coinbase:
+    api_key: YOUR_COINBASE_API_KEY
+    api_secret: YOUR_COINBASE_SECRET
+  okx:
+    api_key: YOUR_OKX_API_KEY
+    api_secret: YOUR_OKX_SECRET
+    passphrase: YOUR_OKX_PASSPHRASE
+
+# Blockchain APIs
+blockchain:
+  etherscan:
+    api_key: YOUR_ETHERSCAN_API_KEY
+  bscscan:
+    api_key: YOUR_BSCSCAN_API_KEY
+  infura:
+    project_id: YOUR_INFURA_PROJECT_ID
+    project_secret: YOUR_INFURA_SECRET
+
+# Social Media APIs
+social:
+  twitter:
+    api_key: YOUR_TWITTER_API_KEY
+    api_secret: YOUR_TWITTER_SECRET
+    bearer_token: YOUR_TWITTER_BEARER_TOKEN
+  reddit:
+    client_id: YOUR_REDDIT_CLIENT_ID
+    client_secret: YOUR_REDDIT_SECRET
+    user_agent: YOUR_REDDIT_USER_AGENT
+
+# News APIs
+news:
+  newsapi:
+    api_key: YOUR_NEWSAPI_KEY
+  cryptocompare:
+    api_key: YOUR_CRYPTOCOMPARE_KEY
+
+# AI/ML APIs
+ai:
+  openai:
+    api_key: YOUR_OPENAI_API_KEY
+  cohere:
+    api_key: YOUR_COHERE_API_KEY
+
+# Notification APIs
+notifications:
+  telegram:
+    bot_token: YOUR_TELEGRAM_BOT_TOKEN
+    chat_id: YOUR_TELEGRAM_CHAT_ID
+  discord:
+    webhook_url: YOUR_DISCORD_WEBHOOK_URL
+  email:
+    smtp_host: smtp.gmail.com
+    smtp_port: 587
+    username: YOUR_EMAIL
+    password: YOUR_APP_PASSWORD

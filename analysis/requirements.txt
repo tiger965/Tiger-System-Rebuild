@@ -1,0 +1,27 @@
+# Tiger System Technical Analysis Requirements
+# Window 4 - Technical Indicators Engine
+
+# Core Libraries
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Technical Analysis Libraries
+ta>=0.10.0
+pandas-ta>=0.3.14b
+talib-binary  # Pre-compiled TA-Lib
+
+# Performance Optimization
+numba>=0.57.0
+bottleneck>=1.3.5
+
+# Data Processing
+scikit-learn>=1.3.0
+
+# Testing
+pytest>=7.4.0
+pytest-benchmark>=4.0.0
+
+# Database Connection (for data fetching)
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0

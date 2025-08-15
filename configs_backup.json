@@ -1,0 +1,156 @@
+{
+  "metadata": {
+    "exported_at": "2025-08-11T05:24:17.580454",
+    "environment": "development",
+    "version": "1.0.0"
+  },
+  "configs": {
+    "system": {
+      "system_name": "Tiger Intelligent Trading Analysis System",
+      "version": "1.0.0",
+      "environment": "development",
+      "windows": {
+        "1": {
+          "name": "Database Infrastructure",
+          "enabled": true,
+          "priority": 1
+        },
+        "2": {
+          "name": "Exchange Data Collection",
+          "enabled": true,
+          "priority": 2
+        },
+        "3": {
+          "name": "Chain & Social Data",
+          "enabled": true,
+          "priority": 2
+        },
+        "4": {
+          "name": "Technical Indicators",
+          "enabled": true,
+          "priority": 3
+        },
+        "5": {
+          "name": "Coin Crawler",
+          "enabled": true,
+          "priority": 2
+        },
+        "6": {
+          "name": "AI Decision System",
+          "enabled": true,
+          "priority": 4
+        },
+        "7": {
+          "name": "Risk Control",
+          "enabled": true,
+          "priority": 5
+        },
+        "8": {
+          "name": "Notification System",
+          "enabled": true,
+          "priority": 5
+        },
+        "9": {
+          "name": "Learning System",
+          "enabled": true,
+          "priority": 3
+        },
+        "10": {
+          "name": "Integration Testing",
+          "enabled": true,
+          "priority": 6
+        }
+      },
+      "performance": {
+        "max_workers": 10,
+        "batch_size": 1000,
+        "query_timeout": 30,
+        "cache_ttl": 3600
+      },
+      "monitoring": {
+        "enabled": true,
+        "log_level": "info",
+        "metrics_interval": 60,
+        "health_check_interval": 30
+      },
+      "retention": {
+        "market_data_days": 90,
+        "chain_data_days": 180,
+        "social_data_days": 30,
+        "system_logs_days": 30
+      },
+      "alerts": {
+        "error_rate_threshold": 0.05,
+        "latency_threshold_ms": 1000,
+        "memory_usage_threshold": 0.8,
+        "cpu_usage_threshold": 0.9
+      }
+    },
+    "database": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "tiger_system",
+      "user": "tiger_app",
+      "password": "${TIGER_DB_PASSWORD}",
+      "pool_size": 10,
+      "max_overflow": 20,
+      "query_timeout": 30000,
+      "statement_timeout": 60000,
+      "archive_days": 30,
+      "partition_days": 30
+    },
+    "api_keys": {
+      "binance_api_key": "",
+      "binance_secret": "",
+      "claude_api_key": "",
+      "telegram_bot_token": "",
+      "twitter_api_key": "",
+      "coingecko_api_key": ""
+    },
+    "trading": {
+      "symbols": [
+        "BTC/USDT",
+        "ETH/USDT"
+      ],
+      "intervals": [
+        "1m",
+        "5m",
+        "15m",
+        "1h",
+        "4h",
+        "1d"
+      ],
+      "max_position_size": 10000,
+      "risk_per_trade": 0.02,
+      "stop_loss": 0.05,
+      "take_profit": 0.1,
+      "trailing_stop": 0.03
+    },
+    "risk": {
+      "max_drawdown": 0.2,
+      "max_daily_loss": 0.05,
+      "max_open_positions": 5,
+      "risk_score_threshold": 70,
+      "emergency_stop": true,
+      "alert_levels": [
+        "info",
+        "warning",
+        "critical",
+        "emergency"
+      ]
+    },
+    "notification": {
+      "enabled": true,
+      "channels": [
+        "telegram",
+        "email",
+        "webhook"
+      ],
+      "telegram_chat_id": "",
+      "email_recipients": [],
+      "webhook_url": "",
+      "alert_throttle": 60,
+      "batch_notifications": true
+    }
+  }
+}
