@@ -1,0 +1,60 @@
+2025-08-15 07:28:00,404 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,407 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,409 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,410 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,411 - monitoring_activation_system - INFO - 触发级别判定: 1级 (最大变化: 0.40%)
+2025-08-15 07:28:00,411 - monitoring_activation_system - INFO - 触发事件记录: {"level": 1, "timestamp": "2025-08-15T07:28:00.411407", "price_changes": {"BTCUSDT": 0.004}, "max_change": 0.004, "triggered_symbols": ["BTCUSDT"], "market_snapshot": {"btc_price": 67770.0, "hot_coins_count": 0}}
+2025-08-15 07:28:00,411 - monitoring_activation_system - INFO - 触发级别判定: 2级 (最大变化: 0.70%)
+2025-08-15 07:28:00,412 - monitoring_activation_system - INFO - 触发事件记录: {"level": 2, "timestamp": "2025-08-15T07:28:00.412143", "price_changes": {"BTCUSDT": 0.007}, "max_change": 0.007, "triggered_symbols": ["BTCUSDT"], "market_snapshot": {"btc_price": 67972.5, "hot_coins_count": 0}}
+2025-08-15 07:28:00,412 - monitoring_activation_system - INFO - 触发级别判定: 3级 (最大变化: 1.50%)
+2025-08-15 07:28:00,412 - monitoring_activation_system - INFO - 触发事件记录: {"level": 3, "timestamp": "2025-08-15T07:28:00.412895", "price_changes": {"BTCUSDT": 0.015}, "max_change": 0.015, "triggered_symbols": ["BTCUSDT"], "market_snapshot": {"btc_price": 68512.5, "hot_coins_count": 0}}
+2025-08-15 07:28:00,414 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,415 - monitoring_activation_system - INFO - 调整触发灵敏度: 2.0x
+2025-08-15 07:28:00,415 - monitoring_activation_system - INFO - 新的触发阈值: {1: 0.006, 2: 0.01, 3: 0.02}
+2025-08-15 07:28:00,415 - monitoring_activation_system - INFO - 调整触发灵敏度: 0.5x
+2025-08-15 07:28:00,415 - monitoring_activation_system - INFO - 新的触发阈值: {1: 0.003, 2: 0.005, 3: 0.01}
+2025-08-15 07:28:00,417 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,420 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,422 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,422 - command_interface - ERROR - 命令缺少必需字段: window
+2025-08-15 07:28:00,422 - command_interface - ERROR - window必须是整数
+2025-08-15 07:28:00,424 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,424 - command_interface - ERROR - 缺少必需参数: user_id
+2025-08-15 07:28:00,426 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,511 - command_interface - WARNING - 类BaseDAL需要参数创建，返回模拟数据: BaseDAL.__init__() missing 2 required positional arguments: 'db_config' and 'redis_config'
+2025-08-15 07:28:00,511 - command_interface - INFO - 命令执行成功: Window1.get_account_cache
+2025-08-15 07:28:00,515 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,515 - command_interface - ERROR - 检测到自然语言命令，拒绝执行: 请查看BTC价格
+2025-08-15 07:28:00,515 - command_interface - ERROR - 检测到自然语言命令，拒绝执行: please check BTC price
+2025-08-15 07:28:00,518 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,520 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,524 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,531 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,532 - window_commander - INFO - 调用Window 1 (数据库): get_account_cache({'user_id': 'default'})
+2025-08-15 07:28:00,534 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,535 - window_commander - INFO - 执行工作流: market_scan
+2025-08-15 07:28:00,536 - window_commander - INFO - 调用Window 2 (交易所): get_hot_ranking({'exchange': 'binance', 'top': 15})
+2025-08-15 07:28:00,536 - window_commander - INFO - 调用Window 2 (交易所): get_volume_surge({'threshold': 50, 'timeframe': '1h'})
+2025-08-15 07:28:00,538 - window_commander - INFO - 调用Window 3 (数据采集): crawl_twitter({'keyword': 'crypto surge', 'time_range_minutes': 60, 'get_sentiment': True, 'min_followers': 10000})
+2025-08-15 07:28:00,543 - window_commander - INFO - 调用Window 3 (数据采集): track_whale_transfers({'min_amount_usd': 5000000, 'chains': ['ETH', 'BSC', 'SOL'], 'direction': 'all'})
+2025-08-15 07:28:00,545 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,546 - window_commander - INFO - 执行工作流: risk_assessment
+2025-08-15 07:28:00,546 - window_commander - INFO - 调用Window 1 (数据库): get_account_cache({'user_id': 'default'})
+2025-08-15 07:28:00,547 - window_commander - INFO - 调用Window 4 (计算工具): calculate_rsi({'prices': [67000, 67100, 67200, 67150, 67300], 'period': 14})
+2025-08-15 07:28:00,547 - window_commander - INFO - 调用Window 4 (计算工具): calculate_macd({'prices': [67000, 67100, 67200, 67150, 67300], 'fast_period': 12, 'slow_period': 26, 'signal_period': 9})
+2025-08-15 07:28:00,547 - window_commander - INFO - 调用Window 7 (风控执行): calculate_kelly_position({'win_probability': 0.55, 'odds': 2, 'max_risk': 0.02, 'account_balance': 100000})
+2025-08-15 07:28:00,549 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,552 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,554 - preprocessing_layer - INFO - 初始化预处理层...
+2025-08-15 07:28:00,554 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,555 - window_commander - INFO - 窗口指挥官初始化完成
+2025-08-15 07:28:00,555 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,555 - preprocessing_layer - INFO - 预处理层初始化完成
+2025-08-15 07:28:00,557 - monitoring_activation_system - INFO - 三级触发系统初始化完成
+2025-08-15 07:28:00,557 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,558 - monitoring_activation_system - INFO - 触发级别判定: 3级 (最大变化: 1.20%)
+2025-08-15 07:28:00,558 - monitoring_activation_system - INFO - 触发事件记录: {"level": 3, "timestamp": "2025-08-15T07:28:00.558463", "price_changes": {"BTCUSDT": 0.012}, "max_change": 0.012, "triggered_symbols": ["BTCUSDT"], "market_snapshot": {"btc_price": 68310.0, "hot_coins_count": 0}}
+2025-08-15 07:28:00,558 - command_interface - WARNING - 类BaseDAL需要参数创建，返回模拟数据: BaseDAL.__init__() missing 2 required positional arguments: 'db_config' and 'redis_config'
+2025-08-15 07:28:00,559 - command_interface - INFO - 命令执行成功: Window1.get_account_cache
+2025-08-15 07:28:00,561 - command_interface - INFO - 命令接口初始化完成
+2025-08-15 07:28:00,792 - command_interface - INFO - 命令接口初始化完成
