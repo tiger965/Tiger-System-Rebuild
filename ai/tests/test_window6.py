@@ -18,6 +18,10 @@ from preprocessing_layer import PreprocessingLayer
 from monitoring_activation_system import MonitoringActivationSystem
 from window_commander import WindowCommander
 from command_interface import CommandInterface
+from opportunity_manager import OpportunityManager, OpportunitySignal, AllocationMode
+from simple_simulator import SimpleSimulator
+from decision_tracker import DecisionTracker
+from quality_ranker import QualityRanker
 
 
 class TestMonitoringActivationSystem:
@@ -347,6 +351,336 @@ class TestIntegration:
                 
                 # 必须有class+method或者function
                 assert ("class" in config and "method" in config) or "function" in config
+
+
+class TestOpportunityManager:
+    """10币种精准管理系统测试"""
+    
+    def setup_method(self):
+        """每个测试前的设置"""
+        self.manager = OpportunityManager()
+    
+    def test_initialization(self):
+        """测试初始化"""
+        assert self.manager.MAX_TOTAL_COINS == 10
+        assert self.manager.MAX_USER_COINS == 5
+        assert self.manager.MAX_SIM_COINS == 5
+        assert len(self.manager.managed_positions) == 0
+    
+    def test_signal_allocation(self):
+        """测试信号分配"""
+        # 创建测试信号
+        signals = []
+        for i in range(12):  # 超过上限的信号数量
+            signal = OpportunitySignal(
+                symbol=f"TEST{i}USDT",
+                signal_type="buy",
+                quality_score=0.8 - i * 0.05,  # 递减的质量分数
+                confidence=0.7,
+                entry_price=100.0,
+                target_price=110.0,
+                stop_loss=95.0,
+                source="test",
+                timestamp=datetime.now().isoformat(),
+                risk_reward_ratio=2.0,
+                timeframe="1h",
+                volume_score=0.7,
+                technical_score=0.8,
+                sentiment_score=0.6
+            )
+            signals.append(signal)
+        
+        # 处理信号分配
+        allocation = self.manager.process_opportunities(signals)
+        
+        # 验证分配结果
+        assert "user" in allocation
+        assert "simulation" in allocation
+        assert "rejected" in allocation
+        
+        # 验证数量限制
+        total_allocated = len(allocation["user"]) + len(allocation["simulation"])
+        assert total_allocated <= self.manager.MAX_TOTAL_COINS
+        assert len(allocation["user"]) <= self.manager.MAX_USER_COINS
+        assert len(allocation["simulation"]) <= self.manager.MAX_SIM_COINS
+    
+    def test_quality_ranking(self):
+        """测试质量排序"""
+        signals = [
+            OpportunitySignal("BTC", "buy", 0.9, 0.8, 50000, 55000, 48000, "high_quality", datetime.now().isoformat(), 2.5, "4h", 0.9, 0.9, 0.8),
+            OpportunitySignal("ETH", "buy", 0.6, 0.7, 3000, 3200, 2900, "medium_quality", datetime.now().isoformat(), 2.0, "1h", 0.6, 0.7, 0.5),
+            OpportunitySignal("ADA", "buy", 0.4, 0.5, 1.0, 1.1, 0.95, "low_quality", datetime.now().isoformat(), 1.5, "30m", 0.4, 0.5, 0.3)
+        ]
+        
+        allocation = self.manager.process_opportunities(signals)
+        
+        # 高质量信号应该分配给用户
+        if allocation["user"]:
+            assert allocation["user"][0].quality_score >= 0.7
+    
+    def test_portfolio_full_replacement(self):
+        """测试组合满时的替换逻辑"""
+        # 先填满组合 - 创建混合质量的信号以填满用户和模拟槽位
+        signals = []
+        # 前5个高质量信号分配给用户
+        for i in range(5):
+            signals.append(OpportunitySignal(
+                f"USER{i}", "buy", 0.75, 0.7, 100, 110, 95, "user_fill", 
+                datetime.now().isoformat(), 2.0, "1h", 0.7, 0.7, 0.7
+            ))
+        # 后5个中等质量信号分配给模拟
+        for i in range(5):
+            signals.append(OpportunitySignal(
+                f"SIM{i}", "buy", 0.6, 0.6, 100, 110, 95, "sim_fill", 
+                datetime.now().isoformat(), 2.0, "1h", 0.6, 0.6, 0.6
+            ))
+        
+        self.manager.process_opportunities(signals)
+        assert len(self.manager.managed_positions) == 10
+        
+        # 测试高质量信号替换
+        high_quality_signal = OpportunitySignal(
+            "PREMIUM", "buy", 0.95, 0.9, 200, 220, 190, "premium", 
+            datetime.now().isoformat(), 3.0, "4h", 0.9, 0.9, 0.9
+        )
+        
+        allocation = self.manager.process_opportunities([high_quality_signal])
+        
+        # 应该仍然是10个持仓，但包含新的高质量信号
+        assert len(self.manager.managed_positions) <= 10
+
+
+class TestSimpleSimulator:
+    """虚拟交易模拟器测试"""
+    
+    def setup_method(self):
+        """每个测试前的设置"""
+        self.simulator = SimpleSimulator(initial_balance=100000)
+    
+    def test_initialization(self):
+        """测试初始化"""
+        assert self.simulator.initial_balance == 100000
+        assert self.simulator.current_balance == 100000
+        assert len(self.simulator.positions) == 0
+        assert len(self.simulator.completed_trades) == 0
+    
+    def test_virtual_buy(self):
+        """测试虚拟买入"""
+        success = self.simulator.virtual_buy(
+            symbol="BTCUSDT",
+            entry_price=50000,
+            target_price=55000,
+            stop_loss=47500,
+            position_size_pct=0.02
+        )
+        
+        assert success is True
+        assert "BTCUSDT" in self.simulator.positions
+        assert self.simulator.positions["BTCUSDT"].signal_type == "buy"
+    
+    def test_position_limit(self):
+        """测试持仓数量限制"""
+        # 测试单仓位大小限制
+        success = self.simulator.virtual_buy(
+            "TEST1", 100, 110, 95, position_size_pct=0.15  # 超过max_position_size
+        )
+        assert success is True
+        assert self.simulator.positions["TEST1"].position_size <= self.simulator.max_position_size
+    
+    def test_exit_conditions(self):
+        """测试出场条件"""
+        # 开仓
+        self.simulator.virtual_buy("BTCUSDT", 50000, 55000, 47500, 0.02)
+        
+        # 测试止盈
+        self.simulator.check_exits({"BTCUSDT": 55500})  # 超过目标价
+        assert len(self.simulator.positions) == 0
+        assert len(self.simulator.completed_trades) == 1
+        assert self.simulator.completed_trades[0].status.value == "win"
+    
+    def test_performance_calculation(self):
+        """测试性能计算"""
+        # 执行几笔虚拟交易
+        self.simulator.virtual_buy("BTC1", 50000, 55000, 47500, 0.02)
+        self.simulator.check_exits({"BTC1": 55000})  # 盈利
+        
+        self.simulator.virtual_buy("BTC2", 50000, 55000, 47500, 0.02)
+        self.simulator.check_exits({"BTC2": 47500})  # 亏损
+        
+        report = self.simulator.get_performance_report()
+        
+        assert "balance" in report
+        assert "statistics" in report
+        assert report["statistics"]["total_trades"] == 2
+        assert report["statistics"]["winning_trades"] == 1
+        assert report["statistics"]["losing_trades"] == 1
+
+
+class TestDecisionTracker:
+    """决策跟踪记录测试"""
+    
+    def setup_method(self):
+        """每个测试前的设置"""
+        self.tracker = DecisionTracker()
+    
+    def test_initialization(self):
+        """测试初始化"""
+        assert len(self.tracker.pending_decisions) == 0
+        assert len(self.tracker.completed_decisions) == 0
+        assert self.tracker.accuracy_stats["total_decisions"] == 0
+    
+    def test_record_decision(self):
+        """测试记录决策"""
+        decision_data = {
+            "action": "buy",
+            "symbol": "BTCUSDT",
+            "confidence": 0.8,
+            "entry_price": 50000,
+            "target_price": 55000,
+            "stop_loss": 47500,
+            "reasoning": "强势突破",
+            "trigger_source": "technical"
+        }
+        
+        decision_id = self.tracker.record_decision(decision_data)
+        
+        assert decision_id is not None
+        assert decision_id in self.tracker.pending_decisions
+        assert self.tracker.pending_decisions[decision_id].symbol == "BTCUSDT"
+    
+    def test_update_result(self):
+        """测试更新结果"""
+        # 先记录决策
+        decision_data = {
+            "action": "buy",
+            "symbol": "BTCUSDT", 
+            "confidence": 0.8,
+            "entry_price": 50000
+        }
+        decision_id = self.tracker.record_decision(decision_data)
+        
+        # 更新结果
+        result_data = {
+            "result": "win",
+            "exit_price": 55000,
+            "pnl": 1000,
+            "pnl_pct": 0.1
+        }
+        self.tracker.update_result(decision_id, result_data)
+        
+        # 验证
+        assert decision_id not in self.tracker.pending_decisions
+        assert len(self.tracker.completed_decisions) == 1
+        assert self.tracker.completed_decisions[0].result.value == "win"
+    
+    def test_accuracy_calculation(self):
+        """测试准确率计算"""
+        # 记录几个决策和结果
+        decisions = [
+            {"action": "buy", "symbol": "BTC1", "confidence": 0.8, "entry_price": 50000},
+            {"action": "buy", "symbol": "BTC2", "confidence": 0.7, "entry_price": 51000},
+            {"action": "sell", "symbol": "BTC3", "confidence": 0.9, "entry_price": 52000}
+        ]
+        
+        results = [
+            {"result": "win", "pnl": 1000},
+            {"result": "loss", "pnl": -500},
+            {"result": "win", "pnl": 800}
+        ]
+        
+        decision_ids = []
+        for decision in decisions:
+            decision_id = self.tracker.record_decision(decision)
+            decision_ids.append(decision_id)
+        
+        for i, result in enumerate(results):
+            self.tracker.update_result(decision_ids[i], result)
+        
+        # 检查统计
+        assert self.tracker.accuracy_stats["total_decisions"] == 3
+        assert self.tracker.accuracy_stats["correct_predictions"] == 2
+        assert abs(self.tracker.accuracy_stats["accuracy_rate"] - 2/3) < 0.01
+
+
+class TestQualityRanker:
+    """信号质量评估测试"""
+    
+    def setup_method(self):
+        """每个测试前的设置"""
+        self.ranker = QualityRanker()
+    
+    def test_initialization(self):
+        """测试初始化"""
+        assert sum(self.ranker.weights.values()) == 1.0  # 权重总和为1
+        assert len(self.ranker.tier_thresholds) == 6  # 6个质量等级
+    
+    def test_signal_evaluation(self):
+        """测试信号评估"""
+        signal_data = {
+            "symbol": "BTCUSDT",
+            "action": "buy",
+            "confidence": 0.8,
+            "technical_strength": 0.9,
+            "volume_score": 0.8,
+            "sentiment_score": 0.7,
+            "risk_reward_ratio": 2.5,
+            "volatility": 0.03,
+            "entry_price": 50000,
+            "support_level": 49000,
+            "resistance_level": 52000
+        }
+        
+        score, tier, details = self.ranker.evaluate_signal_quality(signal_data)
+        
+        assert 0 <= score <= 1
+        assert tier in [t for t in self.ranker.tier_thresholds.keys()]
+        assert "overall_score" in details
+        assert "category_scores" in details
+    
+    def test_signal_ranking(self):
+        """测试信号排序"""
+        signals = [
+            {"symbol": "BTC", "confidence": 0.9, "technical_strength": 0.9, "risk_reward_ratio": 3.0},
+            {"symbol": "ETH", "confidence": 0.6, "technical_strength": 0.6, "risk_reward_ratio": 1.5},
+            {"symbol": "ADA", "confidence": 0.8, "technical_strength": 0.8, "risk_reward_ratio": 2.0}
+        ]
+        
+        ranked = self.ranker.rank_signals(signals)
+        
+        assert len(ranked) == 3
+        # 验证是按分数降序排列
+        assert ranked[0][1] >= ranked[1][1] >= ranked[2][1]
+    
+    def test_quality_distribution(self):
+        """测试质量分布统计"""
+        signals = [
+            {"confidence": 0.9, "technical_strength": 0.9},
+            {"confidence": 0.7, "technical_strength": 0.7},
+            {"confidence": 0.5, "technical_strength": 0.5},
+            {"confidence": 0.3, "technical_strength": 0.3}
+        ]
+        
+        distribution = self.ranker.get_quality_distribution(signals)
+        
+        assert "total_signals" in distribution
+        assert "average_score" in distribution
+        assert "tier_distribution" in distribution
+        assert distribution["total_signals"] == 4
+    
+    def test_weight_adjustment(self):
+        """测试权重调整"""
+        new_weights = {
+            "technical": 0.3,
+            "market": 0.2,
+            "sentiment": 0.2,
+            "risk": 0.2,
+            "timing": 0.1
+        }
+        
+        self.ranker.adjust_weights(new_weights)
+        
+        assert abs(sum(self.ranker.weights.values()) - 1.0) < 0.01
+        assert abs(self.ranker.weights["technical"] - 0.3) < 0.01
 
 
 def run_performance_test():
