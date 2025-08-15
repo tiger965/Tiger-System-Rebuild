@@ -10,7 +10,7 @@ async def test_coinglass():
     """测试Coinglass API"""
     print("测试Coinglass API...")
     
-    api_key = "3897e5abd6bf41e1ab2fb61a45f9372d"
+    api_key = "689079f638414a18bac90b722446f3b3"  # 新的API key
     base_url = "https://open-api-v4.coinglass.com"
     
     headers = {
